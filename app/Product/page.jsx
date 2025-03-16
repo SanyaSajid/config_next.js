@@ -25,7 +25,7 @@ export default function ProductPage() {
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const productQuery = `*[_type == "product" && title == "Asgaard-sofa"][0]{
+        const productQuery = `*[_type == "product" && name == "Asgaard sofa"][0]{
           name, price, description, "imageUrl": image.asset->url, sku, category, tags
         }`;
         const relatedQuery = `*[_type == "product"][0...12]{
