@@ -25,3 +25,4 @@
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/checkout/page.tjsx", "components/header.jsx", "components/footer.jsx", "components/ui/input.tsx", "components/PaymentOptions.jsx", "app/Product/page.jsx"],
   "exclude": ["node_modules"]
 }
+

@@ -9,7 +9,7 @@ const Footer = () => {
           <h3 className="text-lg font-bold mb-4 pl-12">Funiro.</h3>
         </div>
         <div style={{ width: "15%" }}>
-          <h4 className="text-lg font-semibold mb-12 text-gray-400">Links</h4>
+          <h4 className="text-lg font-semibold mb-12 text-[#9F9F9F]">Links</h4>
           <ul className="space-y-8 ">
             <li>Home</li>
             <li>Shop</li>
@@ -18,7 +18,7 @@ const Footer = () => {
           </ul>
         </div>
         <div style={{ width: "15%" }}>
-          <h4 className="text-lg font-semibold mb-12 text-gray-400">Help</h4>
+          <h4 className="text-lg font-semibold mb-12 text-[#9F9F9F]">Help</h4>
           <ul className="space-y-8 ">
             <li>Payment Options</li>
             <li>Returns</li>
@@ -26,7 +26,7 @@ const Footer = () => {
           </ul>
         </div>
         <div style={{ width: "30%" }}>
-          <h4 className="text-lg font-semibold mb-12 text-gray-400">
+          <h4 className="text-lg font-semibold mb-12 text-[#9F9F9F]">
             Newsletter
           </h4>
           <form>

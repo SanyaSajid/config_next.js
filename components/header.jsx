@@ -38,7 +38,7 @@ const Header = () => {
           <a href="/Wishlist"><img src="/images/heart.png" alt="Wishlist" className="h-6" />
           </a>
           
-          <a href="/cart"><img src="/images/cart.png" alt="Cart" className="h-6" /></a>
+          <a href="/cartside"><img src="/images/cart.png" alt="Cart" className="h-6" /></a>
 
         </div>
       </div>

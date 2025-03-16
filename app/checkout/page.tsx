@@ -1,13 +1,19 @@
 "use client"; // Marks this file as a client component for using React hooks
 import React, { useState } from "react";
+import { useSelector } from "react-redux"; 
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/header"; // Adjust the path if necessary
 import Footer from "@/components/footer"; // Adjust the path if necessary
 
+import { RootState } from "@/app/store/store"; // Adjust the path as needed
+
+
 const CheckoutPage = () => {
   const [selectedPayment, setSelectedPayment] = useState("");
+  const cart = useSelector((state: RootState) => state.cart.items);
+  const subtotal = cart.reduce((acc, product) => acc + (product.price * product.quantity), 0);
 
   return (
     <>
@@ -129,19 +135,23 @@ const CheckoutPage = () => {
               </div>
 
               <div className="mt-2 space-y-4">
-                <div className="flex justify-between">
-                  <span>Asgard solo x 1</span>
-                  <span>Rs. 250,000.00</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Subtotal</span>
-                  <span>Rs. 250,000.00</span>
-                </div>
-                <div className="flex justify-between font-bold text-lg">
-                  <span>Total</span>
-                  <span className="text-[#B88E2F]">Rs. 250,000.00</span>
-                </div>
-              </div>
+  {cart.map((product) => (
+    <div key={product.id} className="flex justify-between">
+      <span>{product.name} x {product.quantity}</span>
+      <span>Rs. {(product.price * product.quantity).toLocaleString()}</span>
+      
+    </div>
+  ))}
+  <div className="flex justify-between">
+    <span>Subtotal</span>
+    <span>Rs. {subtotal.toLocaleString()}</span>
+  </div>
+  <div className="flex justify-between font-bold text-lg">
+    <span>Total</span>
+    <span className="text-[#B88E2F]">Rs. {subtotal.toLocaleString()}</span>
+  </div>
+</div>
+
               <hr className="border-t-1 border-gray-300 my-4" />
 
               {/* Payment Options */}
