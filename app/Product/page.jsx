@@ -28,7 +28,7 @@ export default function ProductPage() {
         const productQuery = `*[_type == "product" && title == "Asgaard-sofa"][0]{
           name, price, description, "imageUrl": image.asset->url, sku, category, tags
         }`;
-        const relatedQuery = `*[_type == "product"][0...4]{
+        const relatedQuery = `*[_type == "product"][0...12]{
           name, price, description, "imageUrl": image.asset->url
         }`;
 
