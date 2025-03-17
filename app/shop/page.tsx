@@ -6,15 +6,15 @@ import Image from "next/image";
 
 const products = [
   { name: "Syltherine", price: "Rp 2.500.000", image: "/images/image 1.png", description: "Stylish cafe chair" },
-  { name: "Leviosa", price: "Rp 2.500.000", image: "/images/image2.png", description: "Stylish cafe chair" },
+  { name: "Leviosa", price: "Rp 2.500.000", image: "/images/Leviosa.png", description: "Stylish cafe chair" },
   { name: "Lolito", price: "Rp 7.000.000", image: "/images/image 3.png", description: "Luxury big sofa" },
   { name: "Respira", price: "Rp 500.000", image: "/images/image 4.png", description: "Outdoor bar table and stool" },
   { name: "Syltherine", price: "Rp 2.500.000", image: "/images/image 1.png", description: "Stylish cafe chair" },
-  { name: "Leviosa", price: "Rp 2.500.000", image: "/images/image2.png", description: "Stylish cafe chair" },
+  { name: "Leviosa", price: "Rp 2.500.000", image: "/images/Leviosa.png", description: "Stylish cafe chair" },
   { name: "Lolito", price: "Rp 7.000.000", image: "/images/image 3.png", description: "Luxury big sofa" },
   { name: "Respira", price: "Rp 500.000", image: "/images/image 4.png", description: "Outdoor bar table and stool" },
   { name: "Syltherine", price: "Rp 2.500.000", image: "/images/image 1.png", description: "Stylish cafe chair" },
-  { name: "Leviosa", price: "Rp 2.500.000", image: "/images/image2.png", description: "Stylish cafe chair" },
+  { name: "Leviosa", price: "Rp 2.500.000", image: "/images/Leviosa.png", description: "Stylish cafe chair" },
   { name: "Lolito", price: "Rp 7.000.000", image: "/images/image 3.png", description: "Luxury big sofa" },
   { name: "Respira", price: "Rp 500.000", image: "/images/image 4.png", description: "Outdoor bar table and stool" },
 ];
@@ -95,7 +95,7 @@ const ShopPage = () => {
                 </button>
                 <button className="bg-transparent text-white px-4 py-2 flex items-center justify-center space-x-2">
                   <Image
-                    src="/images/heart1.png"
+                    src="/images/heartt.png"
                     alt="Like"
                     width={20}
                     height={20}

@@ -296,7 +296,7 @@ export default function ProductPage() {
               <span className="text-sm font-medium">Share</span>
             </button>
             <button className="bg-transparent text-white px-4 py-2 flex items-center justify-center space-x-2">
-              <Image src="/images/heart1.png" alt="Like" width={20} height={20} />
+              <Image src="/images/heartt.png" alt="Like" width={20} height={20} />
               <span className="text-sm font-medium">Like</span>
             </button>
           </div>
