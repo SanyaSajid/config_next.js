@@ -59,7 +59,7 @@ export default function ProductPage() {
         id: product.sku || "unknown",
         name: product.name,
         price: product.price,
-        image: product.imageUrl,
+        imageUrl: product.imageUrl,
         quantity,
        
       })

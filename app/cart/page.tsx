@@ -12,7 +12,7 @@ import Link from "next/link";
 export default function Cart() {
   const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart.items);
-
+ 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
     const value = Math.max(1, parseInt(e.target.value) || 1);
     dispatch(updateQuantity({ id, quantity: value }));
@@ -41,11 +41,16 @@ export default function Cart() {
               <span>Quantity</span>
               <span>Subtotal</span>
             </div>
-            {cart.map((product) => (
+            {cart.map((product) => {
+              console.log("Product:", product);
+              let imageUrl = product.imageUrl;
+              let name = product.name;
+            
+                      return (
               <div key={product.id} className="grid grid-cols-[2fr_1fr_1fr_1fr_0.5fr] gap-4 items-center text-sm mt-4">
                 <div className="flex items-center">
                   <div className="bg-[#F9F1E7] p-1 rounded-lg">
-                    <img src={product.imageUrl} alt={product.name} className="rounded-lg w-16 h-16" />
+                    <img src={imageUrl} alt={name} className="rounded-lg w-16 h-16" />
                   </div>
                   <span className="ml-4 text-gray-800 pl-5 font-medium">{product.name}</span>
                 </div>
@@ -58,7 +63,7 @@ export default function Cart() {
                   <img src="./images/delete.png" alt="Delete" className="w-6 h-6 mx-auto" />
                 </button>
               </div>
-            ))}
+            )})}
           </div>
           <div className="col-span-4 bg-[#F5EFE7] p-6 h-[330px] w-[300px] mt-6 flex flex-col items-center justify-center ml-12">
             <h2 className="text-2xl font-bold mb-8">Cart Totals</h2>
