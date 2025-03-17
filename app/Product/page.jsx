@@ -8,6 +8,7 @@ import { createClient } from "@sanity/client";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/app/store/cartSlice";
 
+
 const sanityClient = createClient({
   projectId: "kd8y05km",
   dataset: "production",
@@ -28,7 +29,7 @@ export default function ProductPage() {
         const productQuery = `*[_type == "product" && name == "Asgaard sofa"][0]{
           name, price, description, "imageUrl": image.asset->url, sku, category, tags
         }`;
-        const relatedQuery = `*[_type == "product"][0...12]{
+        const relatedQuery = `*[_type == "product"][0..3]{
           name, price, description, "imageUrl": image.asset->url
         }`;
 
@@ -58,7 +59,7 @@ export default function ProductPage() {
         id: product.sku || "unknown",
         name: product.name,
         price: product.price,
-        imageUrl: product.imageUrl,
+        image: product.imageUrl,
         quantity,
        
       })

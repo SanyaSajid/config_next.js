@@ -15,13 +15,13 @@ interface CartItem {
 }
 const products = [
   { name: "Syltherine", price: "Rp 2.500.000", image: "/images/image 1.png", description: "Stylish cafe chair" },
-  { name: "Leviosa", price: "Rp 2.500.000", image: "/images/image2.png", description: "Stylish cafe chair" },
+  { name: "Leviosa", price: "Rp 2.500.000", image: "/images/Leviosa.png", description: "Stylish cafe chair" },
   { name: "Lolito", price: "Rp 7.000.000", image: "/images/image 3.png", description: "Luxury big sofa" },
   { name: "Respira", price: "Rp 500.000", image: "/images/image 4.png", description: "Outdoor bar table and stool" },
-  { name: "Syltherine", price: "Rp 1.500.000", image: "/images/image 9.png", description: "Stylish cafe chair" },
-  { name: "Leviosa", price: "Rp 1.50.000", image: "/images/image 6.png", description: "Stylish cafe chair" },
-  { name: "Lolito", price: "Rp 7.000.000", image: "/images/image 7.png", description: "Luxury big sofa" },
-  { name: "Respira", price: "Rp 500.000", image: "/images/image 8.png", description: "Outdoor bar table and stool" },
+  { name: "Grifo", price: "Rp 1.500.000", image: "/images/image 9.png", description: "Night lamp" },
+  { name: "Muggo", price: "Rp 1.50.000", image: "/images/image 6.png", description: "Small mug" },
+  { name: "Pingky", price: "Rp 7.000.000", image: "/images/image 7.png", description: "Cute bed sheet" },
+  { name: "Potty", price: "Rp 500.000", image: "/images/image 8.png", description: "Minimalist flower pot" },
  
 ];
 

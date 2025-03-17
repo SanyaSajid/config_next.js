@@ -7,14 +7,12 @@ import { removeFromCart } from "@/app/store/cartSlice";
 import ProductPage from "../Product/page.jsx"; // adjust the path
 import Link from "next/link";
 
-
-
 const CartPage = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
-
+  
   const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
- 
+  
   return (
     <div className="relative h-screen">
       {/* ProductPage as background */}
@@ -26,7 +24,7 @@ const CartPage = () => {
       <div className="absolute inset-0 bg-gray-800 min-h-screen bg-opacity-50 z-10"></div>
 
       {/* Shopping cart sidebar */}
-      <div className="absolute top-0 right-0 h-[450px] w-96 bg-white z-20 shadow-lg p-6">
+      <div className="absolute top-0 right-0 h-[515px] w-96 bg-white z-20 shadow-lg p-6">
         <div className="flex border-b pb-4">
           <h2 className="text-2xl font-bold mr-auto">Shopping Cart</h2>
           <button className="p-2">
@@ -45,10 +43,12 @@ const CartPage = () => {
         <ul className="space-y-4 mt-4 overflow-auto max-h-64">
           {cartItems.length > 0 ? (
             cartItems.map((item) => (
+            
               <li key={item.id} className="flex items-center justify-between border-b pb-4">
                 <div className="flex items-center space-x-4">
                   
-                  <img src={item.image} alt={item.name} className="w-16 h-16 rounded-lg" />
+                
+                  <img src={item.imageUrl }  alt={item.name} className="w-16 h-16 rounded-lg" />
                   <div>
                     <p className="font-medium">{item.name}</p>
                     <p className="text-gray-500">
