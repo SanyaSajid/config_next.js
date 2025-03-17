@@ -44,7 +44,7 @@ export default function Cart() {
             {cart.map((product) => (
               <div key={product.id} className="grid grid-cols-[2fr_1fr_1fr_1fr_0.5fr] gap-4 items-center text-sm mt-4">
                 <div className="flex items-center">
-                  <div className="bg-[#F9F1E7] p-2 rounded-lg">
+                  <div className="bg-[#F9F1E7] p-1 rounded-lg">
                     <img src={product.imageUrl} alt={product.name} className="rounded-lg w-16 h-16" />
                   </div>
                   <span className="ml-4 text-gray-800 pl-5 font-medium">{product.name}</span>
