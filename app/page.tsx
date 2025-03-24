@@ -1,67 +1,61 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import Header from "../components/header";
-import Footer from "../components/footer";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/app/store/cartSlice";
+import { client } from "@/sanity/lib/client";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 
-
-interface CartItem {
+// Define the Product type
+interface Product {
+  _id: string;
   name: string;
-  price: string;
-  desc: string;
-  src: string;
+  imageUrl: string;
+  price: number;
+  description?: string;
 }
-const products = [
-  { name: "Syltherine", price: "Rp 2.500.000", image: "/images/image 1.png", description: "Stylish cafe chair" },
-  { name: "Leviosa", price: "Rp 2.500.000", image: "/images/Leviosa.png", description: "Stylish cafe chair" },
-  { name: "Lolito", price: "Rp 7.000.000", image: "/images/image 3.png", description: "Luxury big sofa" },
-  { name: "Respira", price: "Rp 500.000", image: "/images/image 4.png", description: "Outdoor bar table and stool" },
-  { name: "Grifo", price: "Rp 1.500.000", image: "/images/image 9.png", description: "Night lamp" },
-  { name: "Muggo", price: "Rp 1.50.000", image: "/images/image 6.png", description: "Small mug" },
-  { name: "Pingky", price: "Rp 7.000.000", image: "/images/image 7.png", description: "Cute bed sheet" },
-  { name: "Potty", price: "Rp 500.000", image: "/images/image 8.png", description: "Minimalist flower pot" },
- 
-];
 
-const Home = () => {
-  const [cart, setCart] = useState<CartItem[]>([]);
+export default function Home() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
-  const addToCart = (item: CartItem) => {
-    setCart([...cart, item]);
-  };
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const query = `*[_type == "product"]{
+          _id, name, price, description, "imageUrl": image.asset->url
+        }`;
+        const data: Product[] = await client.fetch(query);
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   return (
     <div className="bg-white">
       <Header />
-
       {/* Hero Section */}
-      <section className="relative w-full h-[500px]  ">
-        <Image
-          src="/images/front.png"
-          alt="Hero Image"
-          layout="fill"
-          objectFit="cover"
-          className="absolute inset-0"
-        />
+      <section className="relative w-full h-[500px]">
+        <Image src="/images/front.png" alt="Hero Image" layout="fill" objectFit="cover" className="absolute inset-0" />
         <div className="absolute right-16 top-1/3 bg-[#FFF3E3] bg-opacity-80 p-6 rounded-lg shadow-lg max-w-md">
-          <h2 className="text-4xl font-bold text-[#B88E2F] mb-4">
-            Discover Our New Collection
-          </h2>
-          <p className="text-lg text-gray-600 mb-6">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          </p>
+          <h2 className="text-4xl font-bold text-[#B88E2F] mb-4">Discover Our New Collection</h2>
+          <p className="text-lg text-gray-600 mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           <Link href="/shop">
-        <button className="mt-6 bg-[#B88E2F] text-white px-6 py-3 rounded-md text-lg">
-          Buy Now
-        </button>
-      </Link>
-         
+            <button className="mt-6 bg-[#B88E2F] text-white px-6 py-3 rounded-md text-lg">Buy Now</button>
+          </Link>
         </div>
       </section>
-
-      {/* Browse The Range Section */}
+        
+        {/* Browse The Range Section */}
       <section className="py-16 bg-white text-center">
         <h2 className="text-3xl font-bold text-gray-800 mb-6">Browse The Range</h2>
         <p className="text-lg text-gray-600 mb-8">
@@ -98,45 +92,79 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Our Products Section */}
-      <section className="py-16 bg-white ">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Our Products</h2>
-          <div className="max-w-screen-xl mx-auto px-6 grid grid-cols-4 gap-3 py-6 mt-6 "> {/* Reduced gap and padding */}
-          {products.map((product, index) => (
-            <div key={index} className="relative bg-white shadow-md overflow-hidden group ml-4 mr-4 mt-2 mb-2">
-              <Image src={product.image} alt={product.name} width={110} height={140} className="w-full" /> {/* Reduced image size */}
-              <div className="p-2"> {/* Reduced padding */}
-                <h3 className="text-lg font-semibold">{product.name}</h3>
-                <p className="text-gray-500 text-sm">{product.description}</p>
-                <p className="text-gray-900 font-bold">{product.price}</p>
-              </div>
-       
-      
-        
-              {/* Hover Effect */}
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                <button className="bg-white text-[#B88E2F] px-4 py-2 font-semibold rounded-md mb-2">Add to cart</button>
-                <div className="flex space-x-3"> {/* Reduced space between buttons */}
-                  <button className="bg-transparent text-white px-4 py-2 flex items-center justify-center space-x-2">
-                    <Image src="/images/share.png" alt="Share" width={20} height={20} />
-                    <span className="text-sm font-medium">Share</span>
-                  </button>
-                  <button className="bg-transparent text-white px-4 py-2 flex items-center justify-center space-x-2">
-                    <Image src="/images/heartt.png" alt="Like" width={20} height={20} />
-                    <span className="text-sm font-medium">Like</span>
-                  </button>
-                </div>
+      {/* Our Products */}
+      <section className="py-16 bg-white">
+      <div className="container mx-auto px-6">
+  <h1 className="text-4xl font-bold text-center mb-10">Our Products</h1>
+  {loading ? (
+    <p className="text-center mt-10">Loading products...</p>
+  ) : (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {products
+        .filter((product) => product.name !== "Asgaard sofa") // Exclude "Asgaard sofa"
+        .map((product) => (
+          <div
+            key={product._id}
+            className="group relative border rounded-lg shadow-md hover:shadow-lg transition"
+          >
+            <Link href={`/product/${product._id}`}>
+              <Image
+                src={product.imageUrl}
+                alt={product.name}
+                width={300}
+                height={300}
+                className="object-cover rounded-md"
+              />
+              <h2 className="mt-4 text-lg font-semibold pl-2 ">{product.name}</h2>
+              {product.description && (
+                  <p className="text-gray-700 text-lg pl-2 pt-1">{product.description}</p>
+                )}
+              <p className="text-base font-semibold pl-2 pt-1 mb-2">Rs {product.price}.000</p>
+            </Link>
+
+            {/* Hover effect with Add to Cart, Share, and Like buttons */}
+            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition">
+              <button
+                className="bg-white text-[#B88E2F] px-4 py-2 font-semibold rounded-md mb-2"
+                onClick={() =>
+                  dispatch(
+                    addToCart({
+                      id: parseInt(product._id), // Convert _id to number if possible
+                      name: product.name,
+                      price: product.price,
+                      quantity: 1, // Default quantity
+                      imageUrl: product.imageUrl,
+                    })
+                  )
+                }
+              >
+                Add to Cart
+              </button>
+
+              {/* Share and Like Buttons */}
+              <div className="flex space-x-3 mt-2">
+                <button className="bg-transparent text-white px-4 py-2 flex items-center justify-center space-x-2">
+                  <Image src="/images/share.png" alt="Share" width={20} height={20} />
+                  <span className="text-sm font-medium">Share</span>
+                </button>
+                <button className="bg-transparent text-white px-4 py-2 flex items-center justify-center space-x-2">
+                  <Image src="/images/heartt.png" alt="Like" width={20} height={20} />
+                  <span className="text-sm font-medium">Like</span>
+                </button>
               </div>
             </div>
-          ))}
-        </div>
-        <div className="flex justify-center items-center space-x-4 my-6">
+          </div>
+        ))}
+            </div>
+           )}
+           <div className="flex justify-center items-center space-x-4 my-6 mt-5 pt-8">
         <button className="bg-white text-[#B88E2F] border border-[#B88E2F] px-6 py-2 ">
           Show More
         </button>
               </div>
-            
-              <section className="bg-[#FCF8F3] p-8 text-center flex flex-col lg:flex-row gap-10 lg:gap-20 items-center">
+          </div>
+   
+      <section className="bg-[#FCF8F3] p-8 text-center flex flex-col lg:flex-row gap-10 lg:gap-20 items-center">
 <div className="w-full lg:w-[30%] text-left ml-0 lg:ml-20">
   <h1 className="text-2xl md:text-4xl font-bold mb-4">
     50+ Beautiful rooms <br /> Inspiration
@@ -174,9 +202,7 @@ const Home = () => {
     <img src="/images/Rectangle 26.png" alt="half" />
     </div>
     </section>
-
-
-        {/* Hashtag Section */}
+          {/* Hashtag Section */}
         <div className="text-center mt-10 pt-10">
                     <p className="text-lg text-gray-800 mb-2">Share your setup with</p>
                     <h2 className="text-3xl text-black font-bold">#FuniroFurniture</h2>
@@ -242,14 +268,14 @@ const Home = () => {
     </div>
   </section>
 </div>
-
-
-           
-      </section>
-    
+</section>
       <Footer />
     </div>
   );
-};
+}
 
-export default Home;
+
+
+
+
+

@@ -4,7 +4,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Provider } from "react-redux";
-import { store } from "./store/store"; // ✅ Correct (named import)
+import { store } from "./store/store"; // 
 
 
 const geistSans = Geist({
