@@ -15,7 +15,7 @@ type Product = {
   name: string;
   image: string;
   price: number;
-  description?: string; // Optional description
+  description?: string; 
 };
 
 export default function Shop() {

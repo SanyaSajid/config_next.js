@@ -4,7 +4,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/app/store/store";
 import { removeFromCart } from "@/app/store/cartSlice";
-import ProductPage from "../Product/page.jsx"; // adjust the path
+import ProductPage from "../Product/page.jsx";
 import Link from "next/link";
 
 const CartPage = () => {

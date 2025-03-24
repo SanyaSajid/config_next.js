@@ -4,10 +4,9 @@ import { useSelector } from "react-redux";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Header from "@/components/header"; // Adjust the path if necessary
-import Footer from "@/components/footer"; // Adjust the path if necessary
-
-import { RootState } from "@/app/store/store"; // Adjust the path as needed
+import Header from "@/components/header"; 
+import Footer from "@/components/footer"; 
+import { RootState } from "@/app/store/store"; 
 
 
 const CheckoutPage = () => {
