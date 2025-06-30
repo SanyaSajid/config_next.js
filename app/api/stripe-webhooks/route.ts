@@ -41,7 +41,7 @@ export async function POST(req: Request) {
         name: item.name,
         quantity: item.quantity,
         price: item.price,
-        imageUrl: item.imageUrl,
+        image: item.imageUrl,
       }));
        
       await client.create({
