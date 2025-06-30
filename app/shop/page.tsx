@@ -51,7 +51,7 @@ export default function Shop() {
         </div>
 
         <div className="py-2 border-t-2 border-gray-50 mt-8">
-          <div className="max-w-screen-xl pt-1 px-6 flex justify-between items-center text-gray-700 pt-5">
+          <div className="max-w-screen-xl  px-6 flex justify-between items-center text-gray-700 pt-5">
             <div className="flex items-center space-x-4">
               <Image src="/images/filter.png" alt="Filter" width={24} height={24} />
               <span className="text-lg">Filter</span>
