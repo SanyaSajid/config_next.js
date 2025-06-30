@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "vercel-build": "npm rebuild esbuild && next build",
     "start": "next start",
     "lint": "next lint --no-fix || exit 0"
   },
