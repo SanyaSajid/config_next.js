@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { client } from "@/sanity/lib/client";
+import { writeClient } from '@/sanity/lib/writeClient' 
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
@@ -14,7 +14,7 @@ export async function GET(req: Request) {
 
   try {
     const query = `*[_type == "order" && userId == $userId && paid == true] | order(_createdAt desc)`;
-    const orders = await client.fetch(query, { userId });
+    const orders = await writeClient.fetch(query, { userId });
 
     return NextResponse.json({ orders });
   } catch (error) {
