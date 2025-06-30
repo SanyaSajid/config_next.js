@@ -1,6 +1,6 @@
 
 import { NextResponse } from "next/server";
-import { client } from "@/sanity/lib/client";
+import { writeClient } from '@/sanity/lib/writeClient' 
 import Stripe from "stripe";
 import { v4 as uuidv4 } from "uuid"; 
 
@@ -44,7 +44,7 @@ export async function POST(req: Request) {
         image: item.imageUrl,
       }));
        
-      await client.create({
+      await writeClient.create({
         _type: "order",
         userId,
         products,
