@@ -13,7 +13,7 @@ const sanityClient = createClient({
   projectId: "kd8y05km",
   dataset: "production",
   apiVersion: "2023-01-01",
-  useCdn: true, // Use CDN for faster responses
+  useCdn: true, 
 });
 
 export default function ProductPage() {
@@ -80,7 +80,7 @@ export default function ProductPage() {
     <>
       <Header />
         
-      {/* Breadcrumb */}
+      
       <div className="flex h-[53px] bg-[#F9F1E7] text-lg text-gray-500 mt-4 pt-2 pl-7">
         <span className="text-gray-500 p-[5px]">Home</span>
         <span className="text-black p-[5px]"> &gt; </span>
@@ -89,19 +89,16 @@ export default function ProductPage() {
         <div className="w-[1px] h-[25px] bg-gray-500 mr-1 ml-2 mt-2"></div>
         <span className="text-black ml-2 mt-1 p-[2px]">{product.name}</span>
       </div>
-{/* Main Product Section */}
 <div className="min-h-screen py-10 px-5">
-  {/* Product Container in a Single Row */}
+
   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
     
-    {/* Left Section: Images */}
     <div className="flex gap-8">
-      {/* Thumbnail Images */}
       <div className="flex flex-col gap-y-2 ">
         {[1, 2, 3, 4].map((_, index) => (
           <div key={index} className="aspect-w-1 aspect-h-1">
             <Image
-              src={`/images/${index + 1}.png`} // Replace with your thumbnails
+              src={`/images/${index + 1}.png`} 
               alt={`Thumbnail ${index + 1}`}
               width={120}
               height={150}
@@ -111,26 +108,22 @@ export default function ProductPage() {
         ))}
       </div>
 
-      {/* Main Product Image */}
       <div className="w-full h-[450px] flex items-center justify-center bg-[#F9F1E7]">
         <Image
           src={product.imageUrl}
           alt={`Image of ${product.name}`}
           width={400}
           height={500}
-          priority // Ensure the main product image loads quickly
+          priority 
           className="object-cover"
         />
       </div>
     </div>
-
-    {/* Right Section: Product Info */}
     <div>
       <h1 className="text-3xl font-semibold mb-3">{product.name}</h1>
       <p className="text-xl text-gray-500 font-medium mb-12">Rs {product.price}.00</p>
       <p className="text-gray-600 mb-6 mt-2">{product.description}</p>
 
-      {/* Size Options */}
       <div className="mb-6">
         <h3 className="text-lg font-semibold mb-2 text-gray-700">Size</h3>
         <div className="flex space-x-3">
@@ -145,7 +138,6 @@ export default function ProductPage() {
         </div>
       </div>
 
-      {/* Color Options */}
       <div className="mb-6">
         <h3 className="text-lg font-semibold mb-2 text-gray-700">Color</h3>
         <div className="flex space-x-3">
@@ -159,7 +151,7 @@ export default function ProductPage() {
         </div>
       </div>
 
-      {/* Add to Cart */}
+      
       <div className="flex items-center space-x-4">
         <div className="flex items-center border border-[#A9A9A9] rounded-lg p-2 h-[50px] w-[110px] justify-between">
           <button
@@ -185,9 +177,9 @@ export default function ProductPage() {
       </div>
 
       
-          {/* Additional Info */}
+          
 <div className="mt-8 flex flex-row">
-  {/* First Column (Labels) */}
+
   <div className="space-y-4 text-sm text-gray-600 pl-2 pr-6 font-medium">
     <p>SKU</p>
     <p>Category</p>
@@ -195,7 +187,7 @@ export default function ProductPage() {
     <p>Share</p>
   </div>
 
-  {/* Second Column (Values for SKU S5001) */}
+
   <div className="space-y-4 text-sm text-gray-600 pr-6 font-medium">
     <p>:</p>
     <p>:</p>
@@ -203,7 +195,7 @@ export default function ProductPage() {
     <p>:</p>
   </div>
 
-  {/* Third Column (Values for SKU SS001) */}
+  
   <div className="space-y-4 text-sm text-gray-600 font-medium">
     <p>SS001</p>
     <p>Chairs</p>
@@ -219,7 +211,7 @@ export default function ProductPage() {
   </div>
 </div>
 
- {/* Description Section */}
+
  <div className="mt-12">
           <div className="flex space-x-6 border-t pt-8 pr-12  items-center justify-center">
             <button className="text-lg font-semibold border-black ">Description</button>
@@ -235,14 +227,14 @@ export default function ProductPage() {
           <div className="flex flex-col items-center justify-center text-[#9F9F9F] text-center px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-6">
             <Image
-              src="/images/sofa.png" // Replace with your images
+              src="/images/sofa.png" 
               alt="Description Image 1"
               width={540}
               height={300}
               className="rounded-lg object-cover ml-5 bg-[#F9F1E7]"
             />
             <Image
-              src="/images/sofa.png" // Replace with your images
+              src="/images/sofa.png"
               alt="Description Image 2"
               width={540}
               height={300}
@@ -251,7 +243,7 @@ export default function ProductPage() {
           </div>
         </div>
         </div>
-      {/* Our Products Section */}
+      
 <div className="border-t border-gray-300 pb-5 pt-10 mt-5">
   <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Related Products</h2>
   <div className="max-w-screen-xl mx-auto px-6 grid grid-cols-4 gap-3 py-6 mt-6">
@@ -304,12 +296,7 @@ export default function ProductPage() {
       </div>
     ))}
   </div>
-</div>
-
-            
-              
-                  
-                 
+</div>           
               <div className="flex justify-center items-center space-x-4 my-6">
               <button className="bg-white text-[#B88E2F] border border-[#B88E2F] px-6 py-2 ">
                 Show More

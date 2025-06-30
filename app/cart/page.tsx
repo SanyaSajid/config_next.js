@@ -1,18 +1,24 @@
-"use client"; // Marks this file as a client component for using React hooks
+"use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/store/store";
 import { removeFromCart, updateQuantity } from "@/app/store/cartSlice";
-
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import Link from "next/link";
+import { loadStripe } from "@stripe/stripe-js";
+import { useAuth } from "@clerk/nextjs";
+import { useUser, RedirectToSignIn } from "@clerk/nextjs";
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 export default function Cart() {
   const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart.items);
- 
+  const { isSignedIn, user } = useUser();
+
+  const [redirectToLogin, setRedirectToLogin] = useState(false);
+
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
     const value = Math.max(1, parseInt(e.target.value) || 1);
     dispatch(updateQuantity({ id, quantity: value }));
@@ -23,6 +29,41 @@ export default function Cart() {
   };
 
   const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+  const handleStripeCheckout = async () => {
+    if (!isSignedIn) {
+      setRedirectToLogin(true);
+      return;
+    }
+
+    const stripe = await stripePromise;
+    
+
+     const res = await fetch("/api/orders", {
+     method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+      userId: user.id,
+    items: cart.map((item) => ({
+      name: item.name,
+      quantity: item.quantity,
+      imageUrl: item.imageUrl,
+      price: item.price,
+    })),
+  }),
+});
+
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert("Stripe checkout failed.");
+    }
+  };
+
+  if (redirectToLogin) {
+    return <RedirectToSignIn />;
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -41,10 +82,8 @@ export default function Cart() {
               <span>Quantity</span>
               <span>Subtotal</span>
             </div>
-            {cart.map((product) => {
-              
-                      return (
-              <div key={product.id} className="grid grid-cols-[2fr_1fr_1fr_1fr_0.5fr] gap-4 items-center text-sm mt-4">
+            {cart.map((product, index) => (
+              <div key={product.id || `${product.name}-${index}`} className="grid grid-cols-[2fr_1fr_1fr_1fr_0.5fr] gap-4 items-center text-sm mt-4">
                 <div className="flex items-center">
                   <div className="bg-[#F9F1E7] p-1 rounded-lg">
                     <img src={product.imageUrl} alt={product.name} className="rounded-lg w-16 h-16" />
@@ -53,15 +92,21 @@ export default function Cart() {
                 </div>
                 <span className="text-gray-800 text-center">Rs. {product.price.toLocaleString()}</span>
                 <div className="pl-10">
-                  <input type="number" value={product.quantity} onChange={(e) => handleQuantityChange(e, product.id)} className="w-8 h-8 border pl-2 text-center rounded-md border-gray-300" />
+                  <input
+                    type="number"
+                    value={product.quantity}
+                    onChange={(e) => handleQuantityChange(e, product.id)}
+                    className="w-8 h-8 border pl-2 text-center rounded-md border-gray-300"
+                  />
                 </div>
                 <span className="text-gray-800 text-center">Rs. {(product.quantity * product.price).toLocaleString()}</span>
                 <button onClick={() => handleDeleteProduct(product.id)}>
-                  <img src="./images/delete.png" alt="Delete" className="w-6 h-6 mx-auto" />
+                  <img src="/images/delete.png" alt="Delete" className="w-6 h-6 mx-auto" />
                 </button>
               </div>
-            )})}
+            ))}
           </div>
+
           <div className="col-span-4 bg-[#F5EFE7] p-6 h-[330px] w-[300px] mt-6 flex flex-col items-center justify-center ml-12">
             <h2 className="text-2xl font-bold mb-8">Cart Totals</h2>
             <div>
@@ -74,11 +119,12 @@ export default function Cart() {
                 <span className="font-bold text-[#B88E2F] text-lg">Rs. {subtotal.toLocaleString()}</span>
               </div>
             </div>
-            <Link href="/checkout">
-              <button className="w-[150px] mt-4 mb-10 text-black border border-black p-2 rounded-md px-4 py-2">
-                Check Out
-              </button>
-            </Link>
+            <button
+              onClick={handleStripeCheckout}
+              className="w-[150px] mt-4 mb-10 text-black border border-black p-2 rounded-md px-4 py-2"
+            >
+              Check Out
+            </button>
           </div>
         </div>
       </div>

@@ -12,7 +12,6 @@ interface CartState {
   items: CartItem[];
 }
 
-// Function to load cart items from localStorage (only on the client side)
 const loadCartFromLocalStorage = (): CartItem[] => {
   if (typeof window !== "undefined") {
     try {
@@ -23,17 +22,15 @@ const loadCartFromLocalStorage = (): CartItem[] => {
       return [];
     }
   }
-  return []; // Return empty array on the server side
+  return []; 
 };
 
-// Function to save cart items to localStorage
 const saveCartToLocalStorage = (items: CartItem[]) => {
   if (typeof window !== "undefined") {
     localStorage.setItem("cart", JSON.stringify(items));
   }
 };
 
-// Initial state with preloaded cart data
 const initialState: CartState = {
   items: loadCartFromLocalStorage(),
 };

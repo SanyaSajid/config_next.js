@@ -9,7 +9,6 @@ import { client } from "@/sanity/lib/client";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
-// Define the Product type
 interface Product {
   _id: string;
   name: string;
@@ -43,7 +42,6 @@ export default function Home() {
   return (
     <div className="bg-white">
       <Header />
-      {/* Hero Section */}
       <section className="relative w-full h-[500px]">
         <Image src="/images/front.png" alt="Hero Image" layout="fill" objectFit="cover" className="absolute inset-0" />
         <div className="absolute right-16 top-1/3 bg-[#FFF3E3] bg-opacity-80 p-6 rounded-lg shadow-lg max-w-md">
@@ -55,7 +53,6 @@ export default function Home() {
         </div>
       </section>
         
-        {/* Browse The Range Section */}
       <section className="py-16 bg-white text-center">
         <h2 className="text-3xl font-bold text-gray-800 mb-6">Browse The Range</h2>
         <p className="text-lg text-gray-600 mb-8">
@@ -91,8 +88,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Our Products */}
       <section className="py-16 bg-white">
       <div className="container mx-auto px-6">
   <h1 className="text-4xl font-bold text-center mb-10">Our Products</h1>
@@ -121,18 +116,16 @@ export default function Home() {
                 )}
               <p className="text-base font-semibold pl-2 pt-1 mb-2">Rs {product.price}.000</p>
             </Link>
-
-            {/* Hover effect with Add to Cart, Share, and Like buttons */}
             <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition">
               <button
                 className="bg-white text-[#B88E2F] px-4 py-2 font-semibold rounded-md mb-2"
                 onClick={() =>
                   dispatch(
                     addToCart({
-                      id: parseInt(product._id), // Convert _id to number if possible
+                      id: parseInt(product._id), 
                       name: product.name,
                       price: product.price,
-                      quantity: 1, // Default quantity
+                      quantity: 1,
                       imageUrl: product.imageUrl,
                     })
                   )
@@ -140,8 +133,6 @@ export default function Home() {
               >
                 Add to Cart
               </button>
-
-              {/* Share and Like Buttons */}
               <div className="flex space-x-3 mt-2">
                 <button className="bg-transparent text-white px-4 py-2 flex items-center justify-center space-x-2">
                   <Image src="/images/share.png" alt="Share" width={20} height={20} />
@@ -158,9 +149,9 @@ export default function Home() {
             </div>
            )}
            <div className="flex justify-center items-center space-x-4 my-6 mt-5 pt-8">
-        <button className="bg-white text-[#B88E2F] border border-[#B88E2F] px-6 py-2 ">
+        <a href="/shop" className="bg-white text-[#B88E2F] border border-[#B88E2F] px-6 py-2 ">
           Show More
-        </button>
+        </a>
               </div>
           </div>
    
@@ -172,9 +163,9 @@ export default function Home() {
   <p className="text-gray-600 mb-6">
     Our designer already made a lot of beautiful prototipes of rooms that inspire you.
   </p>
-  <button className="bg-[#B88E2F] text-white py-2 px-6 md:py-4 md:px-12 font-bold text-sm hover:bg-yellow-600 transition rounded">
+  <a href="/shop" className="bg-[#B88E2F] text-white py-2 px-6 md:py-4 md:px-12 font-bold text-sm hover:bg-yellow-600 transition rounded">
     Explore More
-  </button>
+  </a>
 </div>
 
 <div className="flex flex-col sm:flex-row gap-8 items-center justify-center">
@@ -185,7 +176,7 @@ export default function Home() {
       className="w-full sm:w-auto max-w-full h-auto"
     />
     <div className="flex">
-      <div className="absolute  absolute top-3/4 left-1/3  transform -translate-x-1/2 ">
+      <div className="absolute top-3/4 left-1/3  transform -translate-x-1/2 ">
                 <img
       src="/images/Rectangle 29.png"
       alt="box"
@@ -202,7 +193,6 @@ export default function Home() {
     <img src="/images/Rectangle 26.png" alt="half" />
     </div>
     </section>
-          {/* Hashtag Section */}
         <div className="text-center mt-10 pt-10">
                     <p className="text-lg text-gray-800 mb-2">Share your setup with</p>
                     <h2 className="text-3xl text-black font-bold">#FuniroFurniture</h2>

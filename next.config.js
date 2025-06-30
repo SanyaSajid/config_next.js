@@ -1,12 +1,12 @@
-require("dotenv").config(); // Load environment variables
+require("dotenv").config();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    ignoreDuringBuilds: true, // Ignore ESLint errors during builds
+    ignoreDuringBuilds: true, 
   },
   images: {
-    domains: ["cdn.sanity.io"], // Allow images from Sanity's CDN
+    domains: ["cdn.sanity.io"], 
   },
 };
 
