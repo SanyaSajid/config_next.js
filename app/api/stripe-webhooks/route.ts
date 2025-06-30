@@ -11,7 +11,6 @@ export async function POST(req: Request) {
   const rawBody = await req.text();
 
   let event: Stripe.Event;
-  
 
   try {
     event = stripe.webhooks.constructEvent(
